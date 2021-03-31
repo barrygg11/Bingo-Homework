@@ -10,5 +10,10 @@ include('user.php');
     }
 
 $user = new user;
-$user -> getUser($account, $password);
+$ret = $user->getUser($account, $password);
 
+if($ret){
+    header("Location: http://127.0.0.1/work/lobby.html");
+}else{
+    echo "<script>alert('登入失敗'); location.href =  'login.html'; </script>";
+}

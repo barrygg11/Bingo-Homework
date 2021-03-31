@@ -3,28 +3,26 @@ class user {
 
     function getUser($account, $password) {
         include 'database.php';
-            $sql = "select * from users account = '$account' and password ='$password'";
+        $ret = false;
+            $sql = "select * from users where account = '$account' and password ='$password'";
             $result = mysqli_query($db, $sql);
             $row = mysqli_num_rows($result);
 
         if($row){
-                echo '登入成功';
-            }else{
-                echo '帳號密碼錯誤';
+            $ret = true;
         }
+
+        return $ret;
     }
 
-    function addUser($username, $phone, $overage, $account, $password) {
+    function addUser($params) {
         include 'database.php';
-        $sql = "INSERT INTO users (username, phone, overage, account, password) VALUES ('$username', '$phone', '$overage', '$account', '$password')";
+        $sql = "INSERT INTO users (username, phone, overage, account, password)";
+        $sql .= "VALUES ('".$params['username']."', ".$params['phone'].", ".$params['overage'].", '".$params['account']."', '".$params['password']."')";
         mysqli_query($db, $sql);
-        
-        if ($db){
-            echo '註冊成功';
-        }else{
-            echo '註冊失敗';
-        }
+        $check = self::getUser($params['account'], $params['password']);
+
+        return $check;
     }
 }
-
 ?>
