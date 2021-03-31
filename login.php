@@ -1,5 +1,5 @@
 <?php
-include('user.php');
+include('database.php');
 
     $account = $_POST['account'];
     $password = $_POST['password'];
@@ -9,7 +9,7 @@ include('user.php');
         exit;
     }
 
-$user = new user;
+$user = new db;
 $ret = $user->getUser($account, $password);
 
 if($ret){
