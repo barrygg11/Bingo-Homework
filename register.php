@@ -1,5 +1,5 @@
 <?php
-include('user.php');
+include('database.php');
 
 $username = $_POST['username'];
 $phone = $_POST['phone'];
@@ -22,7 +22,7 @@ $params = array(
 
 
 
-$user = new user;
+$user = new db;
 $check = $user -> addUser($params);
 
 if ($check){
