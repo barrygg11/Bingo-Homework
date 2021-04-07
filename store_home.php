@@ -8,17 +8,11 @@ include ('database.php');
         <title>會員儲值系統</title>
     </head>
     <body>
+        
         <?php 
         $account = $_SESSION['account'];
-        $overage = $_SESSION['overage'];
         $data = new db;
         $lobby = $data -> dataUser($account);
-        
-        ?>
-
-<?php
-        $total = new db;
-        $row = $total->selectmoneyUser($account, $overage);
         ?>
         
         <form name="store" action="lobby.php" method="post">
@@ -26,7 +20,7 @@ include ('database.php');
             儲值金額 : <input type="text" name="overage"><p>
         <input type="submit" name="btn" value="儲值">
         <input type="button" onclick="history.back()" value="回上頁"></input><p>
-            金額：$ <?php echo($lobby['overage'])?>
+            金額：$ <?php echo($lobby['overage']) ?>
         </form>
     </body>
 </html>
