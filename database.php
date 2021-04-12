@@ -73,9 +73,31 @@ class db {
 
     //寫入獲勝者資料
     function insertGame1Result($user_id,$gtype,$wtype,$gold,$odd,$wingdd){
-     $sql = "INSERT INTO orders(user_id,gtype, wtype, gold, odd, wingdd, time) VALUES('$user_id','$gtype','$wtype','$gold','$odd','$wingdd',now())";
-     $result=mysqli_query($this->db,$sql);
+        $sql = "INSERT INTO orders(user_id,gtype, wtype, gold, odd, wingdd, time) VALUES('$user_id','$gtype','$wtype','$gold','$odd','$wingdd',now())";
+        $result=mysqli_query($this->db,$sql);
     }
 
+    //查詢玩家game1資訊
+    function searchBetSlip($user_id){
+        $sql = "select user_id, gtype, wtype, gold, odd, wingdd, time from orders where user_id = '$user_id' ORDER BY time DESC";
+        $result=mysqli_query($this->db,$sql);
+        return $result;
+    }
+
+    //下注總和
+    function goldTotal($user_id){
+        $sql = "select sum(gold) from orders where user_id = '$user_id'";
+        $result=mysqli_query($this->db,$sql);
+        $data = mysqli_fetch_assoc($result);
+        return $data;
+    }
+
+    //輸贏總和
+    function wingddGoldTotal($user_id){
+        $sql = "select sum(wingdd) from orders where user_id = '$user_id'";
+        $result=mysqli_query($this->db,$sql);
+        $data = mysqli_fetch_assoc($result);
+        return $data;
+    }
 }
 ?>
