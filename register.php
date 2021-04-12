@@ -12,6 +12,7 @@ if ($username =="" || $phone =="" || $overage =="" || $account =="" || $password
     exit;
 }
 
+//用陣列來表示
 $params = array(
     'username' => $username,
     'phone' => $phone,
