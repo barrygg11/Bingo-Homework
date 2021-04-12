@@ -21,6 +21,7 @@ $db = new db; //呼叫database的getGameOdds function
 單: <input type="text" required name="single" value="0"></p>
 雙: <input type="text" required name="double" value="0"></p>
 <input type="submit" name="submit" value="下注">
+<input type ="button" onclick="javascript:location.href='http://127.0.0.1/work/lobby_home.php'" value="回上頁">
 </form>
 </body>
 </html>
