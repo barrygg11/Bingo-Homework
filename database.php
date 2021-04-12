@@ -1,5 +1,6 @@
 <?php
 class db {
+    //建構子會自動執行，有function需要使用$this->db
     function __construct() {
         $this->db = mysqli_connect("localhost", "root", "Zx11111!", "member") or die(mysqli_error());
     }
@@ -40,12 +41,6 @@ class db {
         mysqli_query($this->db, $sql);
     }
 
-    // function storeUser($account, $overage, $username, $phone, $password){
-    //     $sql = "INSERT INTO users (username, phone, overage, account, password) VALUES ('$username', '$phone', '$overage', '$account', '$password')";
-    //     //$sql = "select sum(overage) from users where account = '$account'";
-    //     mysqli_query($this->db, $sql);
-    // }
-
     //查詢當前是哪個使用者session
     function dataUser($account){
         $sql = "select * from users where account = '$account' ";
@@ -68,10 +63,19 @@ class db {
         return $row;
     }
 
-    // function selecmoneyUser($account, $overage){
-    //     $sql = "select * from users like overage = '$overage' where account = '$account' ";
-    //     $result=mysqli_query($this->db,$sql);
-    // }
+    //取出game資料
+    function getGameOdds($gtype){
+        $sql = "select odd from game where gtype = '$gtype'";
+        $result=mysqli_query($this->db,$sql);
+        $data = mysqli_fetch_all($result,MYSQLI_NUM);
+        return $data; //回傳一個值
+    }
+
+    //寫入獲勝者資料
+    function insertGame1Result($user_id,$gtype,$wtype,$gold,$odd,$wingdd){
+     $sql = "INSERT INTO orders(user_id,gtype, wtype, gold, odd, wingdd, time) VALUES('$user_id','$gtype','$wtype','$gold','$odd','$wingdd',now())";
+     $result=mysqli_query($this->db,$sql);
+    }
 
 }
 ?>
